@@ -150,11 +150,13 @@ Here is another comment.
 transition: slide-up
 layout: center
 ---
+<div class="max-w-3xl px-1 text-gray-300">
 
 <h3 class="text-yellow-300">"Good code should be as clear as prose." — Robert C. Martin</h3>
 
 > _好的程式碼應該像散文一樣清晰。_
 
+</div>
 ---
 transition: fade
 ---
@@ -226,7 +228,7 @@ transition: slide-left
 layout: center
 ---
 
-<div class="max-w-3xl px-1">
+<div class="max-w-3xl px-1 text-gray-300">
 <h3 class="text-yellow-300">"The quality of your code determines the cost of future maintenance." — Martin Fowler</h3>
 
 > *程式碼的品質決定了未來的維護成本。*
@@ -416,11 +418,13 @@ transition: slide-left
 layout: center
 ---
 
+<div class="max-w-3xl px-1 text-gray-300">
+
 <h3 class="text-yellow-300">"Consistency is the foundation of effective teamwork." — Douglas Crockford</h3>
 
 > _一致性是團隊協作的基石。_
 
-
+</div>
 ---
 
 ## level: 2
