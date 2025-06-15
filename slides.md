@@ -4,6 +4,7 @@ theme: seriph
 # random image from a curated Unsplash collection by Anthony
 # like them? see https://unsplash.com/collections/94734566/slidev
 background: https://cover.sli.dev
+author: Dave
 # some information about your slides (markdown enabled)
 title: 提升開發效率的利器
 info: |
@@ -149,6 +150,7 @@ Here is another comment.
 transition: slide-up
 layout: center
 ---
+
 <div class="max-w-3xl px-1 text-gray-300">
 
 <h3 class="text-yellow-300">"Good code should be as clear as prose." — Robert C. Martin</h3>
@@ -156,6 +158,7 @@ layout: center
 > _好的程式碼應該像散文一樣清晰。_
 
 </div>
+
 ---
 transition: fade
 ---
@@ -184,7 +187,12 @@ v-click="3"
 :initial="{ y: 40, opacity: 0 }"
 :enter="{ y: 0, opacity: 1, transition: {delay: 200} }">
 
-```javascript {*|*|*|*|*|3,10,17}
+````md magic-move {at:4, lines:true}
+```javascript
+$("#btnDelete").click(deleteMember)
+```
+
+```javascript {*|3,10,17}
 function deleteMember() {
   // 取值
   var memNo = $("#input").data("memno")
@@ -201,16 +209,17 @@ function deleteMember() {
   if (!memName) alert("請選擇人員")
   // ...其他檢查
 
-  var inParam = $.param({ memNo, account, bMemName,memName, depNo, description})
+  var inParam = $.param({memNo, account, bMemName, memName, depNo, description,})
   var data = sendDeleteRequest(inParam) // 送出刪除請求
   if (!data.ErrorMessage) alert("儲存成功")
 }
 ```
+````
 
 </div>
 
-<arrow v-click="[4]" x1="555" y1="200" x2="360" y2="230" color="#953" width="2" arrowSize="1" />
-<arrow v-click="[4]" x1="585" y1="310" x2="400" y2="358" color="#953" width="2" arrowSize="1" />
+<arrow v-click="[5]" x1="545" y1="200" x2="380" y2="230" color="#953" width="2" arrowSize="1" />
+<arrow v-click="[5]" x1="585" y1="310" x2="420" y2="358" color="#953" width="2" arrowSize="1" />
 
 <div
   class="text-slate-300 text-center bg-slate-800 p-2 max-w-lg rounded-sm"
@@ -230,7 +239,7 @@ layout: center
 <div class="max-w-3xl px-1 text-gray-300">
 <h3 class="text-yellow-300">"The quality of your code determines the cost of future maintenance." — Martin Fowler</h3>
 
-> *程式碼的品質決定了未來的維護成本。*
+> _程式碼的品質決定了未來的維護成本。_
 
 </div>
 
@@ -257,118 +266,118 @@ v-motion
 ````md magic-move {lines:true}
 ```javascript
 function grade(score) {
-  var result;
+  var result
 
   if (score > 90) {
-    result = 'A';
+    result = "A"
   } else {
     if (score > 80) {
-      result = 'B';
+      result = "B"
     } else {
       if (score > 70) {
-        result = 'C';
+        result = "C"
       } else {
-        result = 'F';
+        result = "F"
       }
     }
   }
 
-  return result;
+  return result
 }
-
 ```
 
 ```javascript
 function grade(score) {
-  if (score > 90) return 'A'
+  if (score > 90) return "A"
   else if (score > 80) {
-    return 'B';
+    return "B"
   } else if (score > 70) {
-    return 'C';
+    return "C"
   }
 
-  return 'F';
+  return "F"
 }
-
 ```
+
 ```javascript
 const grade = (score) => {
-  if (score > 90) return 'A'
-  if (score > 80) return 'B'
-  if (score > 70) return 'C'
+  if (score > 90) return "A"
+  if (score > 80) return "B"
+  if (score > 70) return "C"
   else {
-    return 'F' 
+    return "F"
   }
 }
-
 ```
+
 ```javascript
 //🔴 版本一：老式寫法
 function grade(score) {
-  var result; // 使用 var，不是 ES6+
+  var result // 使用 var，不是 ES6+
 
   if (score > 90) {
-    result = 'A';
-  } else {      
+    result = "A"
+  } else {
     // 過度巢狀
     if (score > 80) {
-      result = 'B';
+      result = "B"
     } else {
       if (score > 70) {
-        result = 'C';
+        result = "C"
       } else {
-        result = 'F'; // 回傳方式固定但可簡化
+        result = "F" // 回傳方式固定但可簡化
       }
     }
   }
-  return result;
+  return result
 }
-
 ```
+
 ```javascript
 // 🟡 版本二：中期寫法，有改善但風格仍不一致
 function grade(score) {
-  if (score > 90) return 'A'
+  if (score > 90) return "A"
   // 還是有巢狀但比之前少
-  else if (score > 80) {  
-    return 'B';      // 使用 return 時風格不一致（有些單行、有些 block）
+  else if (score > 80) {
+    return "B" // 使用 return 時風格不一致（有些單行、有些 block）
   } else if (score > 70) {
-    return 'C';
+    return "C"
   }
+  // 下方不必要空行過多
 
-  return 'F';
+  return "F"
 }
-
 ```
 
 ```javascript
 // 🟠 版本三：箭頭函式但缺乏可讀性與一致性
 const grade = (score) => {
-  if (score > 90) return 'A'
-  if (score > 80) return 'B'
-  if (score > 70) return 'C'
-  else { // 混合 else 與早期 return
-    return 'F' // 有人不喜歡在前面 if 省略 else，這裡反而加了，也不必要
+  if (score > 90) return "A"
+  if (score > 80) return "B"
+  if (score > 70) return "C"
+  else {
+    // 混合 else 與早期 return
+    return "F" // 有人不喜歡在前面 if 省略 else，這裡反而加了，也不必要
   }
 }
-
 ```
+
 ```javascript
 // ✅ 建議最佳寫法：ESLint 推薦風格一致 + 易讀
 const grade = (score) => {
-  if (score > 90) return 'A';
-  if (score > 80) return 'B';
-  if (score > 70) return 'C';
-  return 'F';
-};
+  if (score > 90) return "A"
+  if (score > 80) return "B"
+  if (score > 70) return "C"
+  return "F"
+}
 // 優點：
 //     ✅ 使用 const 宣告（ES6+）
 //     ✅ 單一 return style，風格一致
 //     ✅ 無不必要巢狀
 //     ✅ 簡短易讀
-
 ```
 ````
+
 <div
   class="text-slate-300 bg-slate-800 px-6 py-2 rounded-md text-left leading-relaxed shadow-md space-y-3"
   v-motion
@@ -429,13 +438,14 @@ class: place-content-center text-center sepia-10 font-bold
 image: https://media.istockphoto.com/id/1306697195/photo/space-exploration.webp?a=1&s=612x612&w=0&k=20&c=0W0wSZearwIpiTt3MSDD6EXQZOe2yrnIDmtS_hDu5YI=
 ---
 
-# Javascript 生態系開發三本柱 
+# Javascript 生態系開發三本柱
 
 ---
 transition: slide-up
 ---
 
 # 🌟 現代 Javascript 開發的基石工具
+
 無論前端後端，甚麼框架 React、Vue 或 .NET 專案，這三個工具不能說必備但都是首選！
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6" 
@@ -489,7 +499,6 @@ v-motion
   </div>
 </div>
 
-
 <!--
 Presenter note with **bold**, *italic*, and ~~striked~~ text.
 
@@ -505,13 +514,13 @@ transition: fade-in
 ```javascript {*} // [!code hl]
 // 小龍的 JavaScript 🚫
 function enrollCourse(course) {
-  course.courseType = typecode1; // 完全不知道 typecode1 是什麼
-  sendToApi(course);
+  course.courseType = typecode1 // 完全不知道 courseType, typecode1 是什麼
+  sendToApi(course)
 }
 ```
 
 ```typescript
-// 升級到 TypeScript ✅
+// 引入 TypeScript ✅
 enum CourseType {
   Required = 1,
   Elective = 2,
@@ -519,15 +528,15 @@ enum CourseType {
 }
 
 type Course = {
-  courseType: CourseType;
-  courseId: string;
-  title: string;
+  courseType: CourseType
+  courseId: string
+  title: string
 }
 
 function enrollCourse(course: Course): void {
-  course.courseType = CourseType.Required; // 型別安全，IDE 提示
-  course.studentName = "Joe"; // ❌ Error: 'studentName' 不存在
-  sendToApi(course);
+  course.courseType = CourseType.Required // 型別安全，IDE 提示
+  course.studentName = "Joe" // ❌ Error: 'studentName' 不存在
+  sendToApi(course)
 }
 ```
 
@@ -540,9 +549,9 @@ enum CourseType {
 }
 
 type Course = {
-  courseType: CourseType;
-  courseId: string;
-  title: string;
+  courseType: CourseType
+  courseId: string
+  title: string
 }
 
 /**
@@ -551,8 +560,8 @@ type Course = {
  * @returns {void}
  */
 function enrollCourse(course: Course): void {
-  course.courseType = CourseType.Required;
-  sendToApi(course);
+  course.courseType = CourseType.Required
+  sendToApi(course)
 }
 // 以上全部 hover 都會有註解說明
 ```
@@ -611,7 +620,6 @@ class: mr-2
 
 # 與 C# 的相似性 🤝
 
-
 <div class="text-lg text-white"
 v-motion
 :initial="{ opacity: 0, y: -20 }"
@@ -620,6 +628,7 @@ v-motion
 
 `TypeScript` 與 `C#` 都出自 <strong>Anders Hejlsberg</strong>（微軟首席架構師）<br />
 他也是 `Delphi` 與 `C#` 的設計者！
+
 </div>
 
 ::left::
@@ -683,29 +692,29 @@ layout: center
 
 ````md magic-move {at:2, lines:true}
 ```js
-var memNo = getApiMemberNo(); // ESLint 警告: 應使用 const
-var memNo = $("input").val();
+var memNo = getApiMemberNo() // ESLint 錯誤: 應使用 const
+var memNo = $("input").val()
 
-if (memNo == '123') { // ESLint 警告: 應使用 ===
-  console.log("Member: " + memNo); // ESLint 警告: 使用模板字串
+if (memNo == "123") {
+  // ESLint 錯誤: 應使用 ===
+  console.log("Member: " + memNo) // ESLint 警告: 使用模板字串
 }
 
-var tempData = []; // ESLint 錯誤：tempData 未使用
+var tempData = [] // ESLint 警告：tempData 未使用
 ```
 
 ### ✨ 配置 ESLint 後更優雅
 
 ```js
-const memNo = getApiMemberNo() || $('input').val(); 
+const memNo = getApiMemberNo() || $("input").val()
 
-if (memNo === '123') { 
-  console.log(`Member: ${memNo}`); 
+if (memNo === "123") {
+  console.log(`Member: ${memNo}`)
 }
-
 ```
 ````
-</div>
 
+</div>
 
 <div class="grid grid-cols-3 gap-4 text-sm text-slate-100 mt-4" 
 v-motion v-click="3" :enter="{x:0, opacity: 50}" :initial="{x:100, opacity:100}">
@@ -743,285 +752,338 @@ v-motion v-click="3" :enter="{x:0, opacity: 50}" :initial="{x:100, opacity:100}"
 </div>
 
 ---
+transition: fade
+layout: center
+---
 
-# Motions
+<div class="max-w-3xl px-1 text-gray-300">
+<h3 class="text-yellow-300">"Quality is a promise in every line of code." — Ward Cunningham</h3>
 
-Motion animations are powered by [@vueuse/motion](https://motion.vueuse.org/), triggered by `v-motion` directive.
+> 品質是每行程式碼的承諾。
 
-```html
+</div>
+
+---
+
+# Prettier：格式化的藝術家 🎨
+
+````md magic-move
+```js
+// 😵 當格式不統一的時候
+function getCourseInfo() {
+  var course = { id: 456, title: "TypeScript 入門" }
+  if (course.title == "TypeScript 入門") return course
+}
+```
+
+```js
+// ✨ Prettier 處理後
+function getCourseInfo() {
+  const course = {
+    id: 456,
+    title: "TypeScript 入門",
+  }
+
+  if (course.title === "TypeScript 入門") {
+    return course
+  }
+}
+```
+````
+
+<div v-click="2" v-motion :enter="{x:0,y:-250, opacity: 50}" :initial="{x:100,y:-500, opacity:100}">
+
+### ⚡ Prettier 的威力
+
+<div class="grid grid-cols-3 gap-4 text-slate-100 text-sm">
+
+<div class="bg-slate-800 p-4 rounded-lg shadow-md border-l-4 border-yellow-400" >
+<h4 class="text-yellow-300 font-bold mb-2">⚡ 自動格式化 (optional)</h4>
+<ul class="list-disc list-inside space-y-1">
+  <li>存檔時自動整理</li>
+  <li>統一縮排（2 spaces）</li>
+  <li>強制使用單引號</li>
+  ...
+</ul>
+</div>
+
+<div class="bg-slate-800 p-4 rounded-lg shadow-md border-l-4 border-pink-400" >
+<h4 class="text-pink-300 font-bold mb-2">🤝 減少爭議</h4>
+<ul class="list-disc list-inside space-y-1">
+  <li>不再爭論 tab vs. space</li>
+  <li>單引號 vs. 雙引號 統一</li>
+  <li>Code Review 聚焦邏輯</li>
+  ...
+</ul>
+</div>
+
+<div class="bg-slate-800 p-4 rounded-lg shadow-md border-l-4 border-green-400" >
+<h4 class="text-green-300 font-bold mb-2">🚀 提升效率</h4>
+
+```json
+{
+  "semi": true,
+  "singleQuote": true,
+  "tabWidth": 2,
+  "trailingComma": "es5"
+}
+```
+
+<p class="mt-2">自行制定規則，全專案統一！</p>
+</div>
+
+</div>
+</div>
+
+---
+
+### 💡 補充說明：VS formatter 與 Prettier 的差異
+
+<div class="bg-slate-900 border-l-4 border-blue-500 p-4 text-sm text-slate-200 rounded shadow-lg" v-motion :initial="{ opacity: 0, x: 50 }" :enter="{ opacity: 1, x: 0 }">
+
+🛠 <strong>Visual Studio</strong> 使用的是不同的 <code>.editorconfig</code> 或 <code>.vssettings</code> 檔案來格式化程式碼。<br/>
+若你在 VS 與 VS Code 混合開發，建議雙方格式化工具都配置一致，避免產生格式衝突。
+
+</div>
+
 <div
+  class="mt-4 p-4 rounded-md bg-slate-800 text-slate-100 shadow-md"
+  v-click
   v-motion
-  :initial="{ x: -80 }"
-  :enter="{ x: 0 }"
-  :click-3="{ x: 80 }"
-  :leave="{ x: 1000 }"
+  :initial="{ scale: 0.95, opacity: 0 }"
+  :enter="{ scale: 1, opacity: 1, transition: { duration: 400 } }"
 >
-  Slidev
-</div>
-```
+  <h3 class="text-lg font-bold text-yellow-300 mb-3">🧪 Prettier vs. ESLint 差異</h3>
 
-<div class="w-60 relative">
-  <div class="relative w-40 h-40">
-    <img
-      v-motion
-      :initial="{ x: 800, y: -100, scale: 1.5, rotate: -50 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-square.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ y: 500, x: -100, scale: 2 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-circle.png"
-      alt=""
-    />
-    <img
-      v-motion
-      :initial="{ x: 600, y: 400, scale: 2, rotate: 100 }"
-      :enter="final"
-      class="absolute inset-0"
-      src="https://sli.dev/logo-triangle.png"
-      alt=""
-    />
+  <table class="table-auto w-full text-sm border-collapse border border-slate-600">
+    <thead>
+      <tr class="bg-slate-700 text-slate-200">
+        <th class="border border-slate-600 px-3 py-2 text-left">工具</th>
+        <th class="border border-slate-600 px-3 py-2 text-left">用途</th>
+        <th class="border border-slate-600 px-3 py-2 text-left">主要功能</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr class="hover:bg-slate-700">
+        <td class="border border-slate-600 px-3 py-2 font-semibold text-blue-300">ESLint</td>
+        <td class="border border-slate-600 px-3 py-2">程式碼品質檢查</td>
+        <td class="border border-slate-600 px-3 py-2">語法錯誤、風格建議、最佳實踐</td>
+      </tr>
+      <tr class="hover:bg-slate-700">
+        <td class="border border-slate-600 px-3 py-2 font-semibold text-pink-300">Prettier</td>
+        <td class="border border-slate-600 px-3 py-2">程式碼格式化</td>
+        <td class="border border-slate-600 px-3 py-2">排版、縮排、字串格式等</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="mt-4 text-green-300 font-semibold text-sm">
+    ✅ 最佳實踐：<span class="text-white">搭配使用，品質與風格兼顧！</span>
   </div>
+</div>
 
+---
+transtion: slide-up
+layout: center
+---
+
+<div class="max-w-3xl px-1 text-gray-300">
+<h3 class="text-yellow-300">"Consistent formatting makes code more readable." — John Carmack</h3>
+
+> 一致的格式讓程式碼更具可讀性。
+
+</div>
+
+---
+transtion: fade-out
+---
+
+## 🪄 Before vs After 🎭
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-slate-100 mt-2">
+
+  <!-- Before -->
   <div
-    class="text-5xl absolute top-14 left-40 text-[#2B90B6] -z-1"
+    class="bg-red-900/40 p-3 rounded-md shadow-inner border border-red-600"
     v-motion
-    :initial="{ x: -80, opacity: 0}"
-    :enter="{ x: 0, opacity: 1, transition: { delay: 2000, duration: 1000 } }">
-    Slidev
+    :initial="{ x: -100, opacity: 0 }"
+    :enter="{ x: 0, opacity: 1, transition: { duration: 400 } }"
+  >
+    <h3 class="font-bold text-red-300 text-lg mb-2">😰 改善前</h3>
+
+```js {monaco}
+function sendToApi(course, memNo){
+  console.log("課程:" , course);
+  console.log("成員:" , memNo);
+}
+
+function addMember(course) {
+  var memNo = sessionStorage.getItem("memNo");
+  // 過度巢狀
+  if (memNo !== "") {
+    var memNo = $("input").val(); // 重複宣告，容易覆蓋資料！
+    if (typeof memNo === "string") {
+      course.typecode = typecode1; // 不明變數，型別不清楚
+      if (course.typecode) {
+        sendToApi(course, memNo); // 不知道函數的傳遞位置順序意義
+      }
+    }
+  }
+}
+addMember(); // 缺少參數
+```
+
   </div>
-</div>
 
-<!-- vue script setup scripts can be directly used in markdown, and will only affects current page -->
-<script setup lang="ts">
-const final = {
-  x: 0,
-  y: 0,
-  rotate: 0,
-  scale: 1,
-  transition: {
-    type: 'spring',
-    damping: 10,
-    stiffness: 20,
-    mass: 2
-  }
-}
-</script>
-
-<div
-  v-motion
-  :initial="{ x:35, y: 30, opacity: 0}"
-  :enter="{ y: 0, opacity: 1, transition: { delay: 3500 } }">
-
-[Learn more](https://sli.dev/guide/animations.html#motion)
-
-</div>
-
----
-
-# LaTeX
-
-LaTeX is supported out-of-box. Powered by [KaTeX](https://katex.org/).
-
-<div h-3 />
-
-Inline $\sqrt{3x-1}+(1+x)^2$
-
-Block
-
-$$
-{1|3|all}
-\begin{aligned}
-\nabla \cdot \vec{E} &= \frac{\rho}{\varepsilon_0} \\
-\nabla \cdot \vec{B} &= 0 \\
-\nabla \times \vec{E} &= -\frac{\partial\vec{B}}{\partial t} \\
-\nabla \times \vec{B} &= \mu_0\vec{J} + \mu_0\varepsilon_0\frac{\partial\vec{E}}{\partial t}
-\end{aligned}
-$$
-
-[Learn more](https://sli.dev/features/latex)
-
----
-
-# Diagrams
-
-You can create diagrams / graphs from textual descriptions, directly in your Markdown.
-
-<div class="grid grid-cols-4 gap-5 pt-4 -mb-6">
-
-```mermaid {scale: 0.5, alt: 'A simple sequence diagram'}
-sequenceDiagram
-    Alice->John: Hello John, how are you?
-    Note over Alice,John: A typical interaction
-```
-
-```mermaid {theme: 'neutral', scale: 0.8}
-graph TD
-B[Text] --> C{Decision}
-C -->|One| D[Result 1]
-C -->|Two| E[Result 2]
-```
-
-```mermaid
-mindmap
-  root((mindmap))
-    Origins
-      Long history
-      ::icon(fa fa-book)
-      Popularisation
-        British popular psychology author Tony Buzan
-    Research
-      On effectiveness<br/>and features
-      On Automatic creation
-        Uses
-            Creative techniques
-            Strategic planning
-            Argument mapping
-    Tools
-      Pen and paper
-      Mermaid
-```
-
-```plantuml {scale: 0.7}
-@startuml
-
-package "Some Group" {
-  HTTP - [First Component]
-  [Another Component]
-}
-
-node "Other Groups" {
-  FTP - [Second Component]
-  [First Component] --> FTP
-}
-
-cloud {
-  [Example 1]
-}
-
-database "MySql" {
-  folder "This is my folder" {
-    [Folder 3]
-  }
-  frame "Foo" {
-    [Frame 4]
-  }
-}
-
-[Another Component] --> [Example 1]
-[Example 1] --> [Folder 3]
-[Folder 3] --> [Frame 4]
-
-@enduml
-```
-
-</div>
-
-Learn more: [Mermaid Diagrams](https://sli.dev/features/mermaid) and [PlantUML Diagrams](https://sli.dev/features/plantuml)
-
----
-
-foo: bar
-dragPos:
-square: 691,32,167,\_,-16
-
----
-dragPos:
-  square: 0,-15,0,0
----
-
-# Draggable Elements
-
-Double-click on the draggable elements to edit their positions.
-
-<br>
-
-###### Directive Usage
-
-```md
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-```
-
-<br>
-
-###### Component Usage
-
-```md
-<v-drag text-3xl>
-  <div class="i-carbon:arrow-up" />
-  Use the `v-drag` component to have a draggable container!
-</v-drag>
-```
-
-<v-drag pos="663,206,261,_,-15">
-  <div text-center text-3xl border border-main rounded>
-    Double-click me!
-  </div>
-</v-drag>
-
-<img v-drag="'square'" src="https://sli.dev/logo.png">
-
-###### Draggable Arrow
-
-```md
-<v-drag-arrow two-way />
-```
-
-<v-drag-arrow pos="67,452,253,46" two-way op70 />
-
----
-
-src: ./pages/imported-slides.md
-hide: false
-
----
-
-
----
-
-# Monaco Editor
-
-Slidev provides built-in Monaco Editor support.
-
-Add `{monaco}` to the code block to turn it into an editor:
+  <!-- After -->
+  <div
+    class="bg-green-900/40 p-4 rounded-md shadow-inner border border-green-600 overflow-y-auto max-h-lg"
+    v-motion
+    v-click
+    :initial="{ x: 100, opacity: 0 }"
+    :enter="{ x: 0, y: -80, opacity: 1, transition: { duration: 400, delay: 300 } }"
+  >
+    <h3 class="font-bold text-green-300 text-lg mb-2">😊 改善後</h3>
 
 ```ts {monaco}
-import { ref } from "vue"
-import { emptyArray } from "./external"
+enum CourseType {
+  Required = 1,
+  Elective = 2,
+  Online = 3,
+}
 
-const arr = ref(emptyArray(10))
+type Course = {
+  courseType: CourseType
+  courseId: string
+  title: string
+}
+
+/**
+ * @description 傳送API
+ * @param course - 課程資料
+ * @param memNo - 現在使用者ID
+ */
+function sendToApi(course: Course, memNo: string){
+  console.log("課程:" , course);
+  console.log("成員:" , memNo);
+}
+
+/** 新增成員 */
+function addMember(course: Course): void {
+  const memNo = sessionStorage.getItem("memNo");
+  if (!memNo) return; // 若 memNo 不存在則直接返回
+  course.courseType = CourseType.Required; // 型別安全，IDE 提示
+  sendToApi(course, memNo);
+}
+addMember();
 ```
 
-Use `{monaco-run}` to create an editor that can execute the code directly in the slide:
+  </div>
+</div>
 
-```ts {monaco-run}
-import { version } from "vue"
-import { emptyArray, sayHello } from "./external"
+<!-- 結果 -->
+<div
+  class="mt-6 px-4 py-3 bg-slate-800 rounded-md shadow max-w-lg mx-auto text-sm text-slate-200"
+  v-click
+  v-motion
+  :initial="{ y:0, scale: 0.9, opacity: 0 }"
+  :enter="{ y:-380, scale: 1, opacity: 1, transition: { duration: 300, delay: 300 } }"
+>
+  🚀 <strong class="text-green-300">結果：</strong>
+  <ul class="mt-2 space-y-1">
+    <li>🐞 Bug 減少 <span class="font-bold text-yellow-300">70%</span></li>
+    <li>⚡ 開發效率提升 <span class="font-bold text-yellow-300">50%</span></li>
+    <li>🔍 閱讀時間節省 <span class="font-bold text-yellow-300">80%</span></li>
+  </ul>
+</div>
 
-sayHello()
-console.log(`vue ${version}`)
-console.log(
-  emptyArray<number>(10).reduce(
-    (fib) => [...fib, fib.at(-1)! + fib.at(-2)!],
-    [1, 1]
-  )
-)
-```
+<!-- Inline style -->
+<style>
+.footnotes-sep {
+  @apply mt-5 opacity-10;
+}
+.footnotes {
+  @apply text-sm opacity-75;
+}
+.footnote-backref {
+  display: none;
+}
+</style>
+
+
 
 ---
+transtion: slide-right
+---
 
+# Wrap up
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-6 text-slate-200 text-sm">
+
+  <!-- 從前的小龍 -->
+  <div
+    class="bg-red-900/40 rounded-md p-4 border border-red-500 shadow-inner"
+    v-motion
+    :initial="{ x: -100, opacity: 0 }"
+    :enter="{ x: 0, opacity: 1, transition: { duration: 400 } }"
+  >
+    <h3 class="text-red-300 text-lg font-bold mb-2">😰 從前的小龍</h3>
+    <ul class="list-disc list-inside space-y-1">
+      <li>型別錯誤導致錯誤難以維護</li>
+      <li>花費大量時間 debug</li>
+      <li>程式碼難以維護，大家各寫各的，自己的能跑就好</li>
+      <li>團隊協作效率低，基本上是一台可以跑但是很醜的車</li>
+      <li>因為錯誤難以掌控所以操作邏輯一律丟給後端</li>
+    </ul>
+  </div>
+
+  <!-- 現在的小龍 -->
+  <div
+    class="bg-green-900/40 rounded-md p-4 border border-green-500 text-yellow-500 shadow-inner"
+    v-motion
+    v-click
+    :initial="{ x: 100, opacity: 0 }"
+    :enter="{ x: 0, opacity: 1, transition: { duration: 400, delay: 200 } }"
+  >
+    <h3 class="text-green-300 text-lg font-bold mb-2">😊 現在的小龍</h3>
+    <ul class="list-disc list-inside space-y-1">
+      <li>開發編譯時就發現問題即使處理</li>
+      <li>程式碼穩定可靠，不容易輕易崩潰</li>
+      <li>開發維護效率提升，時間更好掌控</li>
+      <li>團隊合作順暢，互相運作正常</li>
+      <li>前後各司職責</li>
+    </ul>
+  </div>
+</div>
+
+<!-- 結語 -->
+<div
+  class="mt-6 text-center text-xl text-yellow-300 font-bold"
+  v-click
+  v-motion
+  :initial="{ scale: 0.9, opacity: 0 }"
+  :enter="{ scale: 1, opacity: 1, transition: { duration: 300, delay: 300 } }"
+>
+  🚀 讓我們一起往右側前進！
+</div>
+
+
+---
+layout: center
+---
+
+## 導入計畫：每週工作坊 📚
+
+> 實際操作 Demo • 踩坑經驗分享 • 如何改善現有問題
+
+
+---
 layout: center
 class: text-center
-
 ---
 
-# Learn More
+# 謝謝聆聽
 
-[Documentation](https://sli.dev) · [GitHub](https://github.com/slidevjs/slidev) · [Showcases](https://sli.dev/resources/showcases)
+[把 TypeScript、ESLint、Prettier、Alias 摻再一起做沙尿牛丸 ](https://rexhung0302.github.io/2022/11/06/20221106/) ·[為甚麼要有框架](https://developer.mozilla.org/zh-TW/docs/Learn_web_development/Core/Frameworks_libraries/Introduction) · [GitHub](https://github.com/davelin18yufan/typescript_eslint_slide) · [Showcases](https://sli.dev/resources/showcases)
 
 <PoweredBySlidev mt-10 />
