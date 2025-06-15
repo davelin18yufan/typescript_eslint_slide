@@ -78,8 +78,7 @@ v-motion
 v-click="2"
 :initial="{ y: 40, opacity: 0 }"
 :enter="{ y: 0, opacity: 1, transition: {delay: 200} }">
-小龍在 .NET 專案中，從 HTML 
-script 標籤引入了一個 <code>typecode1</code> 到 <code>typecode10</code>，完全不知道它們是什麼，也找不到來源！
+小龍發現在專案中，JS 裡面有使用叫做 <code>typecode1</code> 到 <code>typecode10</code> 的變數，完全不知道它們是什麼，也找不到來源！
 </div>
 
 <div 
@@ -243,9 +242,9 @@ transition: slide-down
 
 <div class="" 
 v-motion
-:initial="{ x: -100, y: 40, opacity: 0 }"
+:initial="{ y: 40, opacity: 0 }"
 :enter="{ x:0, y: 0, opacity: 1, transition: {delay: 400} }">
-場景二：接手維護別人的專案 ⚔️
+場景三：接手維護別人的專案 ⚔️
 </div>
 
 <div class="text-gray-300" 
@@ -306,8 +305,7 @@ const grade = (score) => {
 ```javascript
 //🔴 版本一：老式寫法
 function grade(score) {
-  // 不是 ES6+
-  var result; // 使用 var
+  var result; // 使用 var，不是 ES6+
 
   if (score > 90) {
     result = 'A';
@@ -323,7 +321,6 @@ function grade(score) {
       }
     }
   }
-
   return result;
 }
 
@@ -425,188 +422,324 @@ layout: center
 > _一致性是團隊協作的基石。_
 
 </div>
----
-
-## level: 2
-
-# Shiki Magic Move
-
-Powered by [shiki-magic-move](https://shiki-magic-move.netlify.app/), Slidev supports animations across multiple code snippets.
-
-Add multiple code blocks and wrap them with <code>````md magic-move</code> (four backticks) to enable the magic move. For example:
-
-````md magic-move {lines: true}
-```ts {*|2|*}
-// step 1
-const author = reactive({
-  name: "John Doe",
-  books: [
-    "Vue 2 - Advanced Guide",
-    "Vue 3 - Basic Guide",
-    "Vue 4 - The Mystery",
-  ],
-})
-```
-
-```ts {*|1-2|3-4|3-4,8}
-// step 2
-export default {
-  data() {
-    return {
-      author: {
-        name: "John Doe",
-        books: [
-          "Vue 2 - Advanced Guide",
-          "Vue 3 - Basic Guide",
-          "Vue 4 - The Mystery",
-        ],
-      },
-    }
-  },
-}
-```
-
-```ts
-// step 3
-export default {
-  data: () => ({
-    author: {
-      name: "John Doe",
-      books: [
-        "Vue 2 - Advanced Guide",
-        "Vue 3 - Basic Guide",
-        "Vue 4 - The Mystery",
-      ],
-    },
-  }),
-}
-```
-
-Non-code blocks are ignored.
-
-```vue
-<!-- step 4 -->
-<script setup>
-const author = {
-  name: "John Doe",
-  books: [
-    "Vue 2 - Advanced Guide",
-    "Vue 3 - Basic Guide",
-    "Vue 4 - The Mystery",
-  ],
-}
-</script>
-```
-````
 
 ---
+layout: image
+class: place-content-center text-center sepia-10 font-bold
+image: https://media.istockphoto.com/id/1306697195/photo/space-exploration.webp?a=1&s=612x612&w=0&k=20&c=0W0wSZearwIpiTt3MSDD6EXQZOe2yrnIDmtS_hDu5YI=
+---
 
-# Components
+# Javascript 生態系開發三本柱 
 
-<div grid="~ cols-2 gap-4">
-<div>
+---
+transition: slide-up
+---
 
-You can use Vue components directly inside your slides.
+# 🌟 現代 Javascript 開發的基石工具
+無論前端後端，甚麼框架 React、Vue 或 .NET 專案，這三個工具不能說必備但都是首選！
 
-We have provided a few built-in components like `<Tweet/>` and `<Youtube/>` that you can use directly. And adding your custom components is also super easy.
+<div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6" 
+v-click
+v-motion
+:initial="{opacity: 0, y: 100}"
+:enter="{y:0, opacity: 100}">
+  <!-- TypeScript -->
+  <div
+    class="bg-slate-800 text-slate-200 p-6 rounded-xl border border-blue-400 shadow-lg hover:shadow-blue-500/50 transition-shadow duration-300"
+  >
+    <div class="text-2xl mb-2 font-mono">🔷 Compiler</div>
+    <h3 class="text-xl font-bold mb-1 text-blue-300">TypeScript</h3>
+    <p class="text-sm mb-3 text-slate-400">型別安全</p>
+    <ul class="list-disc list-inside space-y-1 text-sm" v-mark.circle.orange="2">
+      <li>編譯時錯誤檢查</li>
+      <li>強型別系統</li>
+      <li>增強 IDE 支援</li>
+    </ul>
+    <div class="mt-4 text-xs text-slate-400">✅ 90% 現代前後端框架官方推薦</div>
+  </div>
 
-```html
-<Counter :count="10" />
-```
+  <!-- ESLint -->
+  <div
+    class="bg-slate-800 text-slate-200 p-6 rounded-xl border border-emerald-400 shadow-lg hover:shadow-emerald-500/50 transition-shadow duration-300"
+  >
+    <div class="text-2xl mb-2 font-mono">🔍 Linter</div>
+    <h3 class="text-xl font-bold mb-1 text-emerald-300">ESLint</h3>
+    <p class="text-sm mb-3 text-slate-400">程式碼品質</p>
+    <ul class="list-disc list-inside space-y-1 text-sm">
+      <li v-mark.red="3">統一程式碼風格</li>
+      <li v-mark.red="3">檢測潛在問題</li>
+      <li>推廣最佳實務</li>
+    </ul>
+    <div class="mt-4 text-xs text-slate-400">✅ 各開源協作專案必備</div>
+  </div>
 
-<!-- ./components/Counter.vue -->
-<Counter :count="10" m="t-4" />
-
-Check out [the guides](https://sli.dev/builtin/components.html) for more.
-
+  <!-- Prettier -->
+  <div
+    class="bg-slate-800 text-slate-200 p-6 rounded-xl border border-pink-400 shadow-lg hover:shadow-pink-500/50 transition-shadow duration-300"
+  >
+    <div class="text-2xl mb-2 font-mono">✨ Formatter</div>
+    <h3 class="text-xl font-bold mb-1 text-pink-300">Prettier</h3>
+    <p class="text-sm mb-3 text-slate-400">格式美化</p>
+    <ul class="list-disc list-inside space-y-1 text-sm">
+      <li>自動格式化</li>
+      <li v-mark.red="3">統一程式碼風格</li>
+      <li v-mark.red="4">減少格式爭議</li>
+    </ul>
+    <div class="mt-4 text-xs text-slate-400">✅ GitHub、VS Code、 Cursor 預設整合</div>
+  </div>
 </div>
-<div>
 
-```html
-<Tweet id="1390115482657726468" />
-```
-
-<Tweet id="1390115482657726468" scale="0.65" />
-
-</div>
-</div>
 
 <!--
 Presenter note with **bold**, *italic*, and ~~striked~~ text.
 
-Also, HTML elements are valid:
-<div class="flex w-full">
-  <span style="flex-grow: 1;">Left content</span>
-  <span>Right content</span>
-</div>
 -->
 
 ---
-
-## class: px-20
-
-# Themes
-
-Slidev comes with powerful theming support. Themes can provide styles, layouts, components, or even configurations for tools. Switching between themes by just **one edit** in your frontmatter:
-
-<div grid="~ cols-2 gap-2" m="t-2">
-
-```yaml
+transition: fade-in
 ---
-theme: default
----
+
+# TypeScript：DX (開發者體驗)的救星 🛡️
+
+````md magic-move {at:2, lines:true}
+```javascript {*} // [!code hl]
+// 小龍的 JavaScript 🚫
+function enrollCourse(course) {
+  course.courseType = typecode1; // 完全不知道 typecode1 是什麼
+  sendToApi(course);
+}
 ```
 
-```yaml
----
-theme: seriph
----
+```typescript
+// 升級到 TypeScript ✅
+enum CourseType {
+  Required = 1,
+  Elective = 2,
+  Online = 3,
+}
+
+type Course = {
+  courseType: CourseType;
+  courseId: string;
+  title: string;
+}
+
+function enrollCourse(course: Course): void {
+  course.courseType = CourseType.Required; // 型別安全，IDE 提示
+  course.studentName = "Joe"; // ❌ Error: 'studentName' 不存在
+  sendToApi(course);
+}
 ```
 
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-default/01.png?raw=true" alt="">
+```ts
+// 使用 JSDoc 進一步註解說明 ✅
+enum CourseType {
+  Required = 1,
+  Elective = 2,
+  Online = 3,
+}
 
-<img border="rounded" src="https://github.com/slidevjs/themes/blob/main/screenshots/theme-seriph/01.png?raw=true" alt="">
+type Course = {
+  courseType: CourseType;
+  courseId: string;
+  title: string;
+}
+
+/**
+ * 處理課程註冊
+ * @param {Course} course - 課程物件，包含類型與基本資訊
+ * @returns {void}
+ */
+function enrollCourse(course: Course): void {
+  course.courseType = CourseType.Required;
+  sendToApi(course);
+}
+// 以上全部 hover 都會有註解說明
+```
+````
+
+<div 
+  class="absolute right-20 top-40 text-slate-200 text-sm bg-slate-800 p-4 rounded-md shadow-md w-[300px]"
+  v-click="[1]"
+  v-motion
+  :initial="{x:100, opacity: 0}"
+  :enter="{x:0, opacity: 1}" 
+  :leave="{x:-100, opacity: 0}"
+>
+  <ul class="list-disc list-inside space-y-1">
+    <li>🚫 無法得知變數的型別</li>
+    <li>🚫 無法得知 typecode1 是什麼</li>
+    <li>🚫 可能傳入錯誤屬性卻沒錯誤提示</li>
+  </ul>
+</div>
+
+<div 
+  class="absolute right-20 top-40  text-slate1200 text-sm bg-green-900 p-4 rounded-md shadow-md w-[320px]"
+  v-click="[2]"
+  v-motion
+  :initial="{x:100, opacity: 0}"
+  :enter="{x:0, opacity: 1}" 
+  :leave="{x:-100, opacity: 0}"
+>
+  <ul class="list-disc list-inside space-y-1">
+    <li>✅ 型別定義明確，參數、回傳皆可標註</li>
+    <li>✅ IDE 自動推斷屬性與自動完成</li>
+    <li>✅ 錯誤在開發階段即提示</li>
+  </ul>
+</div>
+
+<div 
+  class="absolute right-20 top-40  text-slate-100 text-sm bg-teal-800 p-4 rounded-md shadow-md w-[320px]"
+  v-click="[3]"
+  v-motion
+  :initial="{x:100, opacity: 0}"
+  :enter="{x:0, opacity: 1}" 
+  :leave="{x:-100, opacity: 0}"
+>
+ <ul class="list-disc list-inside space-y-1">
+    <li>✅ JSDoc 為程式碼加上自動文件與註解說明</li>
+    <li>✅ TypeScript 提供型別檢查與錯誤提示</li>
+    <li>✅ 結合兩者讓程式更易懂、易維護</li>
+    <li>✅ 增加團隊溝通清晰度與註解一致性</li>
+  </ul>
+</div>
+
+---
+layout: two-cols-header
+class: mr-2
+---
+
+# 與 C# 的相似性 🤝
+
+
+<div class="text-lg text-white"
+v-motion
+:initial="{ opacity: 0, y: -20 }"
+:enter="{ opacity: 1, y: 0, transition: { delay: 300 } }"
+>
+
+`TypeScript` 與 `C#` 都出自 <strong>Anders Hejlsberg</strong>（微軟首席架構師）<br />
+他也是 `Delphi` 與 `C#` 的設計者！
+</div>
+
+::left::
+
+<div class=" text-center border border-slate-500 rounded-md p-3 bg-slate-800 shadow-md" v-motion v-click="1" :initial="{opacity: 0, y: 20}" :enter="{opacity: 1, y: 0, transition: { delay: 400 } }">
+<h3 class="text-lg text-cyan-400 font-bold mb-2">C# 風格</h3>
+</div>
+
+```csharp
+public enum OrderType {
+    Standard = 1,
+    Premium = 2,
+    Express = 3
+}
+
+public class Order {
+    public OrderType TypeCode { get; set; }
+}
+```
+
+::right::
+
+<div class="text-center border border-slate-500 rounded-md p-3 bg-slate-800 shadow-md" v-motion v-click="1" :initial="{opacity: 0, y: 20}" :enter="{opacity: 1, y: 0, transition: { delay: 500 } }">
+ <h3 class="text-lg text-yellow-400 font-bold mb-2">TypeScript 風格</h3>
+</div>
+
+```ts
+enum OrderType {
+  Standard: 1,
+  Premium: 2,
+  Express: 3,
+}
+
+interface Order {
+  typecode: OrderType;
+}
+```
+
+---
+transition: fade
+layout: center
+---
+
+<img 
+  class="mx-auto"
+  src="https://external-preview.redd.it/kJxuZLpvgM46uUDHbQD3rrl9PNDsQuLIhMZo58LnSJc.jpg?width=320&crop=smart&auto=webp&s=0163003db810819855fc677e60ab7d5e2e9bd129"
+/>
+
+<div class="max-w-3xl px-1 text-gray-300">
+<h3 class="text-yellow-300">"Types are the foundation of programming." — Anders Hejlsberg</h3>
+
+> 型別是程式設計的基石。
 
 </div>
 
-Read more about [How to use a theme](https://sli.dev/guide/theme-addon#use-theme) and
-check out the [Awesome Themes Gallery](https://sli.dev/resources/theme-gallery).
-
 ---
 
-# Clicks Animations
+# ESLint：程式碼品質守護者 🛡️
 
-You can add `v-click` to elements to add a click animation.
+<div  class="" v-motion v-click="1" :enter="{x:0, opacity: 50}" :initial="{x:100, opacity:100}">
 
-<div v-click>
+````md magic-move {at:2, lines:true}
+```js
+var memNo = getApiMemberNo(); // ESLint 警告: 應使用 const
+var memNo = $("input").val();
 
-This shows up when you click the slide:
+if (memNo == '123') { // ESLint 警告: 應使用 ===
+  console.log("Member: " + memNo); // ESLint 警告: 使用模板字串
+}
 
-```html
-<div v-click>This shows up when you click the slide.</div>
+var tempData = []; // ESLint 錯誤：tempData 未使用
+```
+
+### ✨ 配置 ESLint 後更優雅
+
+```js
+const memNo = getApiMemberNo() || $('input').val(); 
+
+if (memNo === '123') { 
+  console.log(`Member: ${memNo}`); 
+}
+
+```
+````
+</div>
+
+
+<div class="grid grid-cols-3 gap-4 text-sm text-slate-100 mt-4" 
+v-motion v-click="3" :enter="{x:0, opacity: 50}" :initial="{x:100, opacity:100}">
+<div class="bg-slate-800 p-4 rounded-lg shadow-md border-l-4 border-red-500">
+<h4 class="font-bold text-red-400 mb-2">🚫 禁止危險寫法</h4>
+<ul class="list-disc list-inside space-y-1">
+  <li>禁用 <code>var</code>，強制使用 <code>const</code>/<code>let</code></li>
+  <li>禁用 <code>==</code>，強制使用 <code>===</code></li>
+  <li>檢查未使用的變數</li>
+</ul>
+</div>
+
+<div class="bg-slate-800 p-4 rounded-lg shadow-md border-l-4 border-blue-500">
+<h4 class="font-bold text-blue-400 mb-2">📋 統一程式碼風格</h4>
+<ul class="list-disc list-inside space-y-1">
+  <li>強制使用 ES6+ 語法</li>
+  <li>統一命名規則（<code>camelCase</code>）</li>
+  <li>強制使用模板字串</li>
+</ul>
+</div>
+
+<div class="bg-slate-800 p-4 rounded-lg shadow-md border-l-4 border-green-500">
+<h4 class="font-bold text-green-400 mb-2">🎯 對問題設定規則</h4>
+
+```json
+{
+  "no-var": "error",
+  "prefer-const": "warn",
+  "eqeqeq": "error",
+  "prefer-template": "error"
+}
 ```
 
 </div>
-
-<br>
-
-<v-click>
-
-The <span v-mark.red="3"><code>v-mark</code> directive</span>
-also allows you to add
-<span v-mark.circle.orange="4">inline marks</span>
-, powered by [Rough Notation](https://roughnotation.com/):
-
-```html
-<span v-mark.underline.orange>inline markers</span>
-```
-
-</v-click>
-
-<div mt-20 v-click>
-
-[Learn more](https://sli.dev/guide/animations#click-animation)
-
 </div>
 
 ---
