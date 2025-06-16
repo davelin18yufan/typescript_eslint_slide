@@ -160,7 +160,9 @@ Here is another comment.
 
 ---
 transition: slide-up
-layout: center
+layout: image
+class: font-bold place-content-center brightness-110
+image: https://wallpapers.com/images/high/cute-pikachu-pixel-art-cladaclzv66idyd1.webp
 ---
 
 <div class="max-w-3xl px-1 text-gray-300 font-serif">
@@ -245,11 +247,13 @@ function deleteMember() {
 
 ---
 transition: slide-left
-layout: center
+layout: image
+class: sepia-10 font-bold grayscale-50 text-end place-content-end
+image: https://wallpapers.com/images/high/spider-man-pixel-art-ehzqmv57f91vjtxo.webp
 ---
 
-<div class="max-w-3xl px-1 text-gray-300 font-serif">
-<h3 class="text-yellow-300">"The quality of your code determines the cost of future maintenance." — Martin Fowler</h3>
+<div class="px-1 text-gray-300 font-serif max-w-2xl ml-auto">
+<h3 class="text-yellow-300 ">"The quality of your code determines the cost of future maintenance." — Martin Fowler</h3>
 
 > _程式碼的品質決定了未來的維護成本。_
 
@@ -444,8 +448,11 @@ const grade = (score) => {
 
 ---
 transition: slide-left
-layout: center
+layout: image
+class: font-bold text-end place-content-end brightness-80 grayscale-20
+image: https://images6.alphacoders.com/379/thumb-1920-379920.png
 ---
+
 
 <div class="max-w-3xl px-1 text-gray-300 font-serif">
 
@@ -810,9 +817,21 @@ v-motion v-click="3" :enter="{x:0, opacity: 50}" :initial="{x:100, opacity:100}"
 </div>
 
 ---
-transition: fade
 layout: center
 ---
+
+<img 
+  class="mx-auto"
+  src="https://img.ifunny.co/images/cb84a6444dad7ff9f1ec9345e27ec23210c32f2003b46f157245e119f81b10ef_1.jpg"
+/>
+
+---
+transition: fade
+layout: image
+class: sepia-10 font-bold grayscale-40 text-end place-content-end
+image: https://wallpapers.com/images/high/pixel-haunter-m5wtkhrflujiagle.webp
+---
+
 
 <div class="max-w-3xl px-1 text-gray-300 font-serif">
 <h3 class="text-yellow-300">"Quality is a promise in every line of code." — Ward Cunningham</h3>
@@ -969,8 +988,10 @@ trim_trailing_whitespace = true
 </div>
 
 ---
-transtion: slide-up
-layout: center
+transition: slide-up
+layout: image
+class: sepia-10 font-bold grayscale-40 text-end place-content-end
+image: https://wallpapers.com/images/high/minimal-pixel-uitxhkwnbvf0fc6k.webp
 ---
 
 <div class="max-w-3xl px-1 text-gray-300 font-serif">
@@ -990,7 +1011,7 @@ transtion: fade-out
 
   <!-- Before -->
   <div
-    class="bg-red-900/40 p-3 rounded-md shadow-inner border border-red-600"
+    class="bg-red-900/40 p-3 rounded-md shadow-inner border border-red-600 h-[85%] overflow-auto"
     v-motion
     :initial="{ x: -100, opacity: 0 }"
     :enter="{ x: 0, opacity: 1, transition: { duration: 400 } }"
@@ -1057,7 +1078,7 @@ function sendToApi(course: Course, memNo: string): void {
   console.dir({ 課程: course, 成員: memNo }, { color: true });
 }
 
-/** 新增成員 */
+/** @description 新增成員 */
 function addMember(course: Course): void {
   const input = document.querySelector<HTMLInputElement>("input");
   if (!input) {
@@ -1164,7 +1185,9 @@ transtion: slide-right
 </div>
 
 ---
-layout: center
+layout: image
+class: place-content-center text-center sepia-10 font-bold grayscale-40
+image: https://images.unsplash.com/photo-1588399472618-b86d94996ee8?q=80&w=688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
 ---
 
 ## 導入計畫：每週工作坊 📚
