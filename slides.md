@@ -16,8 +16,8 @@ download: true
 exportFilename: frontend structure exported
 colorSchema: dark
 fonts:
-  sans: Roboto
-  serif: Roboto Slab
+  sans: DotGothic16
+  serif: Zen Kurenaido
   mono: Fira Code
 # apply unocss classes to the current slide
 class: text-center
@@ -39,8 +39,8 @@ mdc: true
 
 _讓 JavaScript 開發更安全、更高效_
 
-<div class="pt-8">
-  <span class="px-2 py-1 rounded cursor-pointer" @click="$slidev.nav.next">
+<div class="ml-auto py-8">
+  <span class="px-2 py-1 rounded cursor-pointer text-yellow-300 block text-end" @click="$slidev.nav.next">
     Let's roll. <carbon:arrow-right class="inline"/>
   </span>
 </div>
@@ -55,6 +55,12 @@ _讓 JavaScript 開發更安全、更高效_
     <carbon:logo-github />
   </a>
 </div>
+
+<style>
+  p {
+    color:rgb(239, 181, 21)
+  }
+</style>
 
 <!--
 The last comment block of each slide will be treated as slide notes. It will be visible and editable in Presenter Mode along with the slide. [Read more in the docs](https://sli.dev/guide/syntax.html#notes)
@@ -90,18 +96,18 @@ v-click="3"
 
 ```javascript {monaco} { editorOptions: { wordWrap:'on'} }
 function addMember(course) {
-  course.typecode = typecode1 // 這是什麼？數字？字串？物件？
+  course.typecode = typecode1; // 這是什麼？數字？字串？物件？
   // course 無法得知他是甚麼或是裡面有甚麼，必須要往上翻檔案
-  sendToApi(course) // 送出後只能祈禱伺服器不炸
+  sendToApi(course); // 送出後只能祈禱伺服器不炸
 }
 
-// 每次送出 API，小龍都得重啟伺服器、打開 DevTools 慢慢試，效率低到像在玩「俄羅斯輪盤」！
+// 每次送出 API，小龍都得重啟伺服器、打開 DevTools 慢慢試，效率低筆電又燙！
 ```
 
 </div>
 
 <div
-  class="mx-auto text-center mt-8 p-6 rounded-lg bg-gray-800 bg-opacity-60 shadow-lg"
+  class="mx-auto text-center mt-8 p-6 rounded-lg bg-gray-800 bg-opacity-60 shadow-lg "
   v-motion
   v-click="[4]"
   :initial="{ x: 100, y: -200, opacity: 0 }"
@@ -109,22 +115,26 @@ function addMember(course) {
   :leave="{ x:100, opacity:0 }"
 >
   <h3 class="text-2xl font-bold mb-4 text-blue-300">小龍的痛點 📱</h3>
-  <ul class="text-left text-lg leading-relaxed space-y-2 text-gray-200 mx-auto max-w-2xl">
+  <ul class="text-left text-base leading-relaxed space-y-2 text-gray-200 mx-auto max-w-2xl">
     <li>
-      <span class="font-semibold text-yellow-300">🎲 typecode 來源不明：</span>
-      完全靠猜測，塞 console.log 去送出 API 後才知對錯
+      <span class="font-semibold text-yellow-300">🎲 變數來源不明：</span>
+      沒有型別提示，只能靠 <code>console.log</code> 或送出 API 才知道資料對不對
     </li>
     <li>
-      <span class="font-semibold text-pink-300">😰 效率低下：</span>
-      每次測試都要重啟伺服器，浪費時間
+      <span class="font-semibold text-pink-300">😰 開發效率低下：</span>
+      少打一個欄位或拼錯 key，只有在執行時才爆錯，還得重啟伺服器排查
     </li>
     <li>
       <span class="font-semibold text-red-400">💥 Bug 頻發：</span>
-      各式型別錯誤導致API處理失敗
+      資料結構錯誤、參數型別錯誤，讓程式無法正常運作
     </li>
     <li>
-      <span class="font-semibold text-green-300">🔍 80% 時間在試錯：</span>
-      小龍快被逼瘋
+      <span class="font-semibold text-green-300">🔍 80% 時間在 Debug：</span>
+      小龍寫完還要對著網頁反覆測試、來回修正，快被搞瘋 🌀
+    </li>
+    <li>
+      <span class="font-semibold text-blue-300">🤝 團隊溝通障礙：</span>
+      沒有明確型別，參數要怎麼傳、回傳什麼都只能慢慢往回找或問人
     </li>
   </ul>
 </div>
@@ -140,6 +150,8 @@ function addMember(course) {
 「X!^@#$^!!! 這 typecode 到底是誰寫的？為什麼沒人告訴我它是什麼！」
 <br/>
 「註解哩，我是要通靈嗎？」
+<br/>
+「Ado 救人啊」
 </div>
 
 <!--
@@ -151,7 +163,7 @@ transition: slide-up
 layout: center
 ---
 
-<div class="max-w-3xl px-1 text-gray-300">
+<div class="max-w-3xl px-1 text-gray-300 font-serif">
 
 <h3 class="text-yellow-300">"Good code should be as clear as prose." — Robert C. Martin</h3>
 
@@ -189,29 +201,29 @@ v-click="3"
 
 ````md magic-move {at:4, lines:true}
 ```javascript
-$("#btnDelete").click(deleteMember)
+$('#btnDelete').click(deleteMember);
 ```
 
 ```javascript {*|3,10,17}
 function deleteMember() {
   // 取值
-  var memNo = $("#input").data("memno")
-  var course = $("course").val()
-  var description = $("#description").val()
-  var memName = $("#name").val()
-  var depNo = $("#select").data("code")
+  var memNo = $('#input').data('memno');
+  var course = $('course').val();
+  var description = $('#description').val();
+  var memName = $('#name').val();
+  var depNo = $('#select').data('code');
   // 建檔人
-  var account = sessionStorage.getItem("ma")
-  var memNo = sessionStorage.getItem("memno")
-  var bMemName = sessionStorage.getItem("memName")
-  var type = WebUI.GetQueryString("type")
-  if (!depNo) alert("請選擇單位")
-  if (!memName) alert("請選擇人員")
+  var account = sessionStorage.getItem('ma');
+  var memNo = sessionStorage.getItem('memno');
+  var bMemName = sessionStorage.getItem('memName');
+  var type = WebUI.GetQueryString('type');
+  if (!depNo) alert('請選擇單位');
+  if (!memName) alert('請選擇人員');
   // ...其他檢查
 
-  var inParam = $.param({memNo, account, bMemName, memName, depNo, description,})
-  var data = sendDeleteRequest(inParam) // 送出刪除請求
-  if (!data.ErrorMessage) alert("儲存成功")
+  var inParam = $.param({memNo, account, bMemName, memName, depNo, description});
+  var data = sendDeleteRequest(inParam); // 送出刪除請求
+  if (!data.ErrorMessage) alert('儲存成功');
 }
 ```
 ````
@@ -236,7 +248,7 @@ transition: slide-left
 layout: center
 ---
 
-<div class="max-w-3xl px-1 text-gray-300">
+<div class="max-w-3xl px-1 text-gray-300 font-serif">
 <h3 class="text-yellow-300">"The quality of your code determines the cost of future maintenance." — Martin Fowler</h3>
 
 > _程式碼的品質決定了未來的維護成本。_
@@ -259,131 +271,142 @@ v-motion
 <div class="text-gray-300" 
 v-motion
 :initial="{ y: 40, opacity: 0 }"
-:enter="{ y: 0, opacity: 1, transition: {delay: 400} }">
+:enter="{ y: 0, opacity: 1, transition: {delay: 500} }">
   小龍接手一個同事留下的專案，但是裡面光是條件判斷就有 n 種寫法
 </div>
+
+<div class="text-gray-300" 
+v-motion
+:initial="{ y: 40, opacity: 0 }"
+:enter="{ y: 0, opacity: 1, transition: {delay: 600} }">
+
 
 ````md magic-move {lines:true}
 ```javascript
 function grade(score) {
-  var result
+  var result;
 
   if (score > 90) {
-    result = "A"
+    result = 'A';
   } else {
     if (score > 80) {
-      result = "B"
+      result = 'B';
     } else {
       if (score > 70) {
-        result = "C"
+        result = 'C';
       } else {
-        result = "F"
+        result = 'F';
       }
     }
   }
 
-  return result
+  return result;
 }
 ```
 
 ```javascript
 function grade(score) {
-  if (score > 90) return "A"
+  if (score > 90) return 'A';
   else if (score > 80) {
-    return "B"
+    return 'B';
   } else if (score > 70) {
-    return "C"
+    return 'C';
   }
 
-  return "F"
+
+  return "F";
 }
 ```
 
 ```javascript
 const grade = (score) => {
-  if (score > 90) return "A"
-  if (score > 80) return "B"
-  if (score > 70) return "C"
+  if (score > 90) return 'A';
+  if (score > 80) return 'B';
+  if (score > 70) return 'C';
   else {
-    return "F"
+    return 'F';
   }
-}
+};
 ```
 
 ```javascript
-//🔴 版本一：老式寫法
+// 🔴 版本一：老式寫法
 function grade(score) {
-  var result // 使用 var，不是 ES6+
+  var result; // 使用 var，不是 ES6+
 
   if (score > 90) {
-    result = "A"
+    result = 'A';
   } else {
     // 過度巢狀
     if (score > 80) {
-      result = "B"
+      result = 'B';
     } else {
       if (score > 70) {
-        result = "C"
+        result = 'C';
       } else {
-        result = "F" // 回傳方式固定但可簡化
+        result = 'F'; // 回傳方式固定但可簡化
       }
     }
   }
-  return result
+  return result;
 }
 ```
 
 ```javascript
 // 🟡 版本二：中期寫法，有改善但風格仍不一致
 function grade(score) {
-  if (score > 90) return "A"
+  if (score > 90) return 'A';
   // 還是有巢狀但比之前少
   else if (score > 80) {
-    return "B" // 使用 return 時風格不一致（有些單行、有些 block）
+    return 'B'; // 使用 return 時風格不一致（有些單行、有些 block）
   } else if (score > 70) {
-    return "C"
+    return 'C';
   }
   // 下方不必要空行過多
 
-  return "F"
+
+  return "F"; // 雙引號單引號沒有統一
 }
 ```
 
 ```javascript
 // 🟠 版本三：箭頭函式但缺乏可讀性與一致性
 const grade = (score) => {
-  if (score > 90) return "A"
-  if (score > 80) return "B"
-  if (score > 70) return "C"
+  if (score > 90) return 'A';
+  if (score > 80) return 'B';
+  if (score > 70) return 'C';
   else {
     // 混合 else 與早期 return
-    return "F" // 有人不喜歡在前面 if 省略 else，這裡反而加了，也不必要
+    return 'F'; // 有人不喜歡在前面 if 省略 else，這裡反而加了，也不必要
   }
-}
+};
 ```
 
 ```javascript
-// ✅ 建議最佳寫法：ESLint 推薦風格一致 + 易讀
+// ✅ 建議最佳寫法：ESLint 推薦風格 -> 一致 + 易讀
 const grade = (score) => {
-  if (score > 90) return "A"
-  if (score > 80) return "B"
-  if (score > 70) return "C"
-  return "F"
-}
+  if (score > 90) return 'A';
+  if (score > 80) return 'B';
+  if (score > 70) return 'C';
+  return 'F';
+};
 // 優點：
 //     ✅ 使用 const 宣告（ES6+）
 //     ✅ 單一 return style，風格一致
 //     ✅ 無不必要巢狀
+//     ✅ 排版乾淨
 //     ✅ 簡短易讀
 ```
 ````
+
+</div>
 
 <div
   class="text-slate-300 bg-slate-800 px-6 py-2 rounded-md text-left leading-relaxed shadow-md space-y-3"
   v-motion
   v-click="7"
   :initial="{ x: 100, y: -80, opacity: 0 }"
-  :enter="{ x: 0, y: 0, opacity: 1, transition: { delay: 200 } }"
+  :enter="{ x: 0, y: -30, opacity: 1, transition: { delay: 200 } }"
 >
   <p>🔥 <strong class="text-white">衝突不斷：</strong> 每個人有自己的風格</p>
   <p>⏰ <strong class="text-white">效率低落：</strong> 邏輯問題被格式掩蓋</p>
@@ -395,14 +418,14 @@ const grade = (score) => {
   v-motion
   v-click="8"
   :initial="{ x: 100, y: -80, opacity: 0 }"
-  :enter="{ x: 0, y: -230, opacity: 1, transition: { delay: 200 } }"
+  :enter="{ x: 0, y: -270, opacity: 1, transition: { delay: 200 } }"
 >
   <p class="text-lg font-semibold text-yellow-300">👨‍💼 假設是有主管在 Code Review，場面可能是這樣的：</p>
 
   <ul class="space-y-2 pl-4 list-disc list-inside text-base">
     <li>
       <strong class="text-rose-400">主管：</strong>
-      「這縮排是怎麼回事？<code>if-else</code>是要包到隔壁去嗎怎麼這麼深，我眼睛度數已經夠深了 😩」
+      「這縮排是怎麼回事？<code>if-else</code>是要包到隔壁去嗎怎麼這麼深，我眼睛度數已經夠深了。」
     </li>
     <li>
       <strong class="text-sky-400">小龍：</strong>
@@ -424,7 +447,7 @@ transition: slide-left
 layout: center
 ---
 
-<div class="max-w-3xl px-1 text-gray-300">
+<div class="max-w-3xl px-1 text-gray-300 font-serif">
 
 <h3 class="text-yellow-300">"Consistency is the foundation of effective teamwork." — Douglas Crockford</h3>
 
@@ -446,7 +469,7 @@ transition: slide-up
 
 # 🌟 現代 Javascript 開發的基石工具
 
-無論前端後端，甚麼框架 React、Vue 或 .NET 專案，這三個工具不能說必備但都是首選！
+無論前端後端，甚麼框架 React、Vue、Laravel 或 .NET 專案，這三個工具不能說必備但都是首選！
 
 <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-6" 
 v-click
@@ -455,9 +478,9 @@ v-motion
 :enter="{y:0, opacity: 100}">
   <!-- TypeScript -->
   <div
-    class="bg-slate-800 text-slate-200 p-6 rounded-xl border border-blue-400 shadow-lg hover:shadow-blue-500/50 transition-shadow duration-300"
+    class="bg-slate-800 text-slate-200 p-6 rounded-xl border border-blue-400 shadow-lg animate-glow-blue"
   >
-    <div class="text-2xl mb-2 font-mono">🔷 Compiler</div>
+    <div class="text-2xl mb-2 font-serif">🔷 Compiler</div>
     <h3 class="text-xl font-bold mb-1 text-blue-300">TypeScript</h3>
     <p class="text-sm mb-3 text-slate-400">型別安全</p>
     <ul class="list-disc list-inside space-y-1 text-sm" v-mark.circle.orange="2">
@@ -470,9 +493,9 @@ v-motion
 
   <!-- ESLint -->
   <div
-    class="bg-slate-800 text-slate-200 p-6 rounded-xl border border-emerald-400 shadow-lg hover:shadow-emerald-500/50 transition-shadow duration-300"
+    class="bg-slate-800 text-slate-200 p-6 rounded-xl border border-emerald-400 shadow-lg animate-glow-green"
   >
-    <div class="text-2xl mb-2 font-mono">🔍 Linter</div>
+    <div class="text-2xl mb-2 font-serif">🔍 Linter</div>
     <h3 class="text-xl font-bold mb-1 text-emerald-300">ESLint</h3>
     <p class="text-sm mb-3 text-slate-400">程式碼品質</p>
     <ul class="list-disc list-inside space-y-1 text-sm">
@@ -485,9 +508,9 @@ v-motion
 
   <!-- Prettier -->
   <div
-    class="bg-slate-800 text-slate-200 p-6 rounded-xl border border-pink-400 shadow-lg hover:shadow-pink-500/50 transition-shadow duration-300"
+    class="bg-slate-800 text-slate-200 p-6 rounded-xl border border-pink-400 shadow-lg animate-glow-pink"
   >
-    <div class="text-2xl mb-2 font-mono">✨ Formatter</div>
+    <div class="text-2xl mb-2 font-serif">✨ Formatter</div>
     <h3 class="text-xl font-bold mb-1 text-pink-300">Prettier</h3>
     <p class="text-sm mb-3 text-slate-400">格式美化</p>
     <ul class="list-disc list-inside space-y-1 text-sm">
@@ -498,6 +521,40 @@ v-motion
     <div class="mt-4 text-xs text-slate-400">✅ GitHub、VS Code、 Cursor 預設整合</div>
   </div>
 </div>
+
+<style>
+.card {
+  @apply bg-slate-800 text-slate-200 p-6 rounded-xl shadow-lg transition-all duration-500;
+}
+
+@keyframes glow-blue {
+  0% { box-shadow: 0 0 0px #3b82f6; }
+  50% { box-shadow: 0 0 16px #3b82f6aa; }
+  100% { box-shadow: 0 0 0px #3b82f6; }
+}
+
+@keyframes glow-green {
+  0% { box-shadow: 0 0 0px #10b981; }
+  50% { box-shadow: 0 0 16px #10b981aa; }
+  100% { box-shadow: 0 0 0px #10b981; }
+}
+
+@keyframes glow-pink {
+  0% { box-shadow: 0 0 0px #ec4899; }
+  50% { box-shadow: 0 0 16px #ec4899aa; }
+  100% { box-shadow: 0 0 0px #ec4899; }
+}
+
+.animate-glow-blue {
+  animation: glow-blue 2.2s ease-in-out infinite;
+}
+.animate-glow-green {
+  animation: glow-green 2.2s ease-in-out infinite;
+}
+.animate-glow-pink {
+  animation: glow-pink 2.2s ease-in-out infinite;
+}
+</style>
 
 <!--
 Presenter note with **bold**, *italic*, and ~~striked~~ text.
@@ -514,8 +571,8 @@ transition: fade-in
 ```javascript {*} // [!code hl]
 // 小龍的 JavaScript 🚫
 function enrollCourse(course) {
-  course.courseType = typecode1 // 完全不知道 courseType, typecode1 是什麼
-  sendToApi(course)
+  course.courseType = typecode1; // 完全不知道 courseType, typecode1 是什麼
+  sendToApi(course);
 }
 ```
 
@@ -528,15 +585,15 @@ enum CourseType {
 }
 
 type Course = {
-  courseType: CourseType
-  courseId: string
-  title: string
-}
+  courseType: CourseType;
+  courseId: string;
+  title: string;
+};
 
 function enrollCourse(course: Course): void {
-  course.courseType = CourseType.Required // 型別安全，IDE 提示
-  course.studentName = "Joe" // ❌ Error: 'studentName' 不存在
-  sendToApi(course)
+  course.courseType = CourseType.Required; // 型別安全，IDE 提示
+  course.studentName = 'Joe'; // ❌ Error: 'studentName' 不存在
+  sendToApi(course);
 }
 ```
 
@@ -549,10 +606,10 @@ enum CourseType {
 }
 
 type Course = {
-  courseType: CourseType
-  courseId: string
-  title: string
-}
+  courseType: CourseType;
+  courseId: string;
+  title: string;
+};
 
 /**
  * 處理課程註冊
@@ -560,8 +617,8 @@ type Course = {
  * @returns {void}
  */
 function enrollCourse(course: Course): void {
-  course.courseType = CourseType.Required
-  sendToApi(course)
+  course.courseType = CourseType.Required;
+  sendToApi(course);
 }
 // 以上全部 hover 都會有註解說明
 ```
@@ -692,24 +749,24 @@ layout: center
 
 ````md magic-move {at:2, lines:true}
 ```js
-var memNo = getApiMemberNo() // ESLint 錯誤: 應使用 const
-var memNo = $("input").val()
+var memNo = getApiMemberNo(); // ESLint 錯誤: 應使用 const
+var memNo = $('input').val();
 
-if (memNo == "123") {
+if (memNo == '123') {
   // ESLint 錯誤: 應使用 ===
-  console.log("Member: " + memNo) // ESLint 警告: 使用模板字串
+  console.log('Member: ' + memNo); // ESLint 警告: 使用模板字串
 }
 
-var tempData = [] // ESLint 警告：tempData 未使用
+var tempData = []; // ESLint 警告：tempData 未使用
 ```
 
 ### ✨ 配置 ESLint 後更優雅
 
 ```js
-const memNo = getApiMemberNo() || $("input").val()
+const memNo = getApiMemberNo() || $('input').val();
 
-if (memNo === "123") {
-  console.log(`Member: ${memNo}`)
+if (memNo === '123') {
+  console.log(`Member: ${memNo}`);
 }
 ```
 ````
@@ -771,8 +828,8 @@ layout: center
 ```js
 // 😵 當格式不統一的時候
 function getCourseInfo() {
-  var course = { id: 456, title: "TypeScript 入門" }
-  if (course.title == "TypeScript 入門") return course
+  var course = { id: 456, title: 'TypeScript 入門' };
+  if (course.title == 'TypeScript 入門') return course;
 }
 ```
 
@@ -781,11 +838,11 @@ function getCourseInfo() {
 function getCourseInfo() {
   const course = {
     id: 456,
-    title: "TypeScript 入門",
-  }
+    title: 'TypeScript 入門',
+  };
 
-  if (course.title === "TypeScript 入門") {
-    return course
+  if (course.title === 'TypeScript 入門') {
+    return course;
   }
 }
 ```
@@ -912,17 +969,17 @@ transtion: fade-out
     <h3 class="font-bold text-red-300 text-lg mb-2">😰 改善前</h3>
 
 ```js {monaco}
-function sendToApi(course, memNo){
-  console.log("課程:" , course);
-  console.log("成員:" , memNo);
+function sendToApi(course, memNo) {
+  console.log('課程:', course);
+  console.log('成員:', memNo);
 }
 
 function addMember(course) {
-  var memNo = sessionStorage.getItem("memNo");
+  var memNo = sessionStorage.getItem('memNo');
   // 過度巢狀
-  if (memNo !== "") {
-    var memNo = $("input").val(); // 重複宣告，容易覆蓋資料！
-    if (typeof memNo === "string") {
+  if (memNo !== '') {
+    var memNo = $('input').val(); // 重複宣告，容易覆蓋資料！
+    if (typeof memNo === 'string') {
       course.typecode = typecode1; // 不明變數，型別不清楚
       if (course.typecode) {
         sendToApi(course, memNo); // 不知道函數的傳遞位置順序意義
@@ -953,24 +1010,24 @@ enum CourseType {
 }
 
 type Course = {
-  courseType: CourseType
-  courseId: string
-  title: string
-}
+  courseType: CourseType;
+  courseId: string;
+  title: string;
+};
 
 /**
  * @description 傳送API
  * @param course - 課程資料
  * @param memNo - 現在使用者ID
  */
-function sendToApi(course: Course, memNo: string){
-  console.log("課程:" , course);
-  console.log("成員:" , memNo);
+function sendToApi(course: Course, memNo: string) {
+  console.log('課程:', course);
+  console.log('成員:', memNo);
 }
 
 /** 新增成員 */
 function addMember(course: Course): void {
-  const memNo = sessionStorage.getItem("memNo");
+  const memNo = sessionStorage.getItem('memNo');
   if (!memNo) return; // 若 memNo 不存在則直接返回
   course.courseType = CourseType.Required; // 型別安全，IDE 提示
   sendToApi(course, memNo);
@@ -1009,8 +1066,6 @@ addMember();
   display: none;
 }
 </style>
-
-
 
 ---
 transtion: slide-right
@@ -1067,15 +1122,13 @@ transtion: slide-right
   🚀 讓我們一起往右側前進！
 </div>
 
+---
 
----
-layout: center
----
+## layout: center
 
 ## 導入計畫：每週工作坊 📚
 
 > 實際操作 Demo • 踩坑經驗分享 • 如何改善現有問題
-
 
 ---
 layout: center

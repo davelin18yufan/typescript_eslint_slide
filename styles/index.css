@@ -1,3 +1,4 @@
+
 h1,
 h2 {
   background-color: rgb(33, 131, 46);
@@ -21,4 +22,5 @@ h5 {
 }
 code {
   color: rgb(255, 203, 15);
+  font-family: Fira Code;
 }
