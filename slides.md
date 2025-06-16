@@ -683,7 +683,7 @@ v-motion
 :enter="{ opacity: 1, y: 0, transition: { delay: 300 } }"
 >
 
-`TypeScript` 與 `C#` 都出自 <strong>Anders Hejlsberg</strong>（微軟首席架構師）<br />
+`TypeScript` 出自 <strong>Anders Hejlsberg</strong>（微軟首席架構師）<br />
 他也是 `Delphi` 與 `C#` 的設計者！
 
 </div>
@@ -719,7 +719,7 @@ enum OrderType {
   Express: 3,
 }
 
-interface Order {
+type Order = {
   typecode: OrderType;
 }
 ```
@@ -734,7 +734,7 @@ layout: center
   src="https://external-preview.redd.it/kJxuZLpvgM46uUDHbQD3rrl9PNDsQuLIhMZo58LnSJc.jpg?width=320&crop=smart&auto=webp&s=0163003db810819855fc677e60ab7d5e2e9bd129"
 />
 
-<div class="max-w-3xl px-1 text-gray-300">
+<div class="max-w-3xl px-1 text-gray-300 font-serif">
 <h3 class="text-yellow-300">"Types are the foundation of programming." — Anders Hejlsberg</h3>
 
 > 型別是程式設計的基石。
@@ -749,21 +749,21 @@ layout: center
 
 ````md magic-move {at:2, lines:true}
 ```js
-var memNo = getApiMemberNo(); // ESLint 錯誤: 應使用 const
+var memNo = getMemberNo(); // ESLint 錯誤: 應使用 const
 var memNo = $('input').val();
+var memName = $("name").val(); // ESLint 警告: 未使用的變數
 
-if (memNo == '123') {
-  // ESLint 錯誤: 應使用 ===
+if (memNo == '123') { // ESLint 錯誤: 應使用 ===
   console.log('Member: ' + memNo); // ESLint 警告: 使用模板字串
 }
 
 var tempData = []; // ESLint 警告：tempData 未使用
 ```
 
-### ✨ 配置 ESLint 後更優雅
 
 ```js
-const memNo = getApiMemberNo() || $('input').val();
+// ✨ 配置 ESLint 後
+const memNo = getMemberNo() || $('input').val();
 
 if (memNo === '123') {
   console.log(`Member: ${memNo}`);
@@ -801,7 +801,8 @@ v-motion v-click="3" :enter="{x:0, opacity: 50}" :initial="{x:100, opacity:100}"
   "no-var": "error",
   "prefer-const": "warn",
   "eqeqeq": "error",
-  "prefer-template": "error"
+  "prefer-template": "error",
+  "no-unsued-var": "warn"
 }
 ```
 
@@ -813,7 +814,7 @@ transition: fade
 layout: center
 ---
 
-<div class="max-w-3xl px-1 text-gray-300">
+<div class="max-w-3xl px-1 text-gray-300 font-serif">
 <h3 class="text-yellow-300">"Quality is a promise in every line of code." — Ward Cunningham</h3>
 
 > 品質是每行程式碼的承諾。
@@ -829,35 +830,45 @@ layout: center
 // 😵 當格式不統一的時候
 function getCourseInfo() {
   var course = { id: 456, title: 'TypeScript 入門' };
-  if (course.title == 'TypeScript 入門') return course;
+    if (course.title == 'TypeScript 入門') return course
 }
 ```
+
+```js
+// 😵 當格式不統一的時候
+function getCourseInfo() {
+  // 空格不一致
+  var course = { id: 456, title: 'TypeScript 入門' }; // 使用單引號，物件攤平較難讀
+    if (course.title == 'TypeScript 入門') return course // 沒使用block，並且結尾沒有分號
+}
+```
+
 
 ```js
 // ✨ Prettier 處理後
 function getCourseInfo() {
   const course = {
     id: 456,
-    title: 'TypeScript 入門',
+    title: TypeScript 入門",
   };
 
-  if (course.title === 'TypeScript 入門') {
+  if (course.title === "TypeScript 入門") {
     return course;
   }
 }
 ```
 ````
 
-<div v-click="2" v-motion :enter="{x:0,y:-250, opacity: 50}" :initial="{x:100,y:-500, opacity:100}">
+<div v-click="3" v-motion :enter="{x:0,y:-150, opacity: 50}" :initial="{x:100,y:-400, opacity:100}">
 
-### ⚡ Prettier 的威力
+<h3 class="text-center border-b-1">⚡ Prettier 的威力</h3>
 
 <div class="grid grid-cols-3 gap-4 text-slate-100 text-sm">
 
 <div class="bg-slate-800 p-4 rounded-lg shadow-md border-l-4 border-yellow-400" >
 <h4 class="text-yellow-300 font-bold mb-2">⚡ 自動格式化 (optional)</h4>
 <ul class="list-disc list-inside space-y-1">
-  <li>存檔時自動整理</li>
+  <li>存檔時自動整理或是指令輸入</li>
   <li>統一縮排（2 spaces）</li>
   <li>強制使用單引號</li>
   ...
@@ -899,16 +910,34 @@ function getCourseInfo() {
 <div class="bg-slate-900 border-l-4 border-blue-500 p-4 text-sm text-slate-200 rounded shadow-lg" v-motion :initial="{ opacity: 0, x: 50 }" :enter="{ opacity: 1, x: 0 }">
 
 🛠 <strong>Visual Studio</strong> 使用的是不同的 <code>.editorconfig</code> 或 <code>.vssettings</code> 檔案來格式化程式碼。<br/>
-若你在 VS 與 VS Code 混合開發，建議雙方格式化工具都配置一致，避免產生格式衝突。
+若你在 VS 與其他 IDE 混合開發，建議雙方格式化工具都配置一致，避免產生格式衝突。
+
+<div class="bg-slate-900 border-l-4 border-gray-500 text-sm text-slate-200 rounded shadow-lg" v-click="[1]" v-motion :initial="{ opacity: 0, x: 50 }" :enter="{ opacity: 1, x: 0 }">
+
+```json {2-10}{lines:true,startLine:1}
+# .editorconfig - 控管縮排和行尾
+root = true
+
+[*]
+indent_style = space
+indent_size = 2
+end_of_line = lf
+charset = utf-8
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+```
+</div>
+
 
 </div>
 
 <div
   class="mt-4 p-4 rounded-md bg-slate-800 text-slate-100 shadow-md"
-  v-click
+  v-click="2"
   v-motion
   :initial="{ scale: 0.95, opacity: 0 }"
-  :enter="{ scale: 1, opacity: 1, transition: { duration: 400 } }"
+  :enter="{ y: -220, scale: 1, opacity: 1, transition: { duration: 400 } }"
 >
   <h3 class="text-lg font-bold text-yellow-300 mb-3">🧪 Prettier vs. ESLint 差異</h3>
 
@@ -944,7 +973,7 @@ transtion: slide-up
 layout: center
 ---
 
-<div class="max-w-3xl px-1 text-gray-300">
+<div class="max-w-3xl px-1 text-gray-300 font-serif">
 <h3 class="text-yellow-300">"Consistent formatting makes code more readable." — John Carmack</h3>
 
 > 一致的格式讓程式碼更具可讀性。
@@ -969,25 +998,29 @@ transtion: fade-out
     <h3 class="font-bold text-red-300 text-lg mb-2">😰 改善前</h3>
 
 ```js {monaco}
+// 傳送API
 function sendToApi(course, memNo) {
-  console.log('課程:', course);
-  console.log('成員:', memNo);
+  console.dir({ 課程: course, 成員: memNo }, { color: true });
 }
 
 function addMember(course) {
   var memNo = sessionStorage.getItem('memNo');
-  // 過度巢狀
+
+  // 巢狀過深，命名混亂，型別不明
   if (memNo !== '') {
-    var memNo = $('input').val(); // 重複宣告，容易覆蓋資料！
-    if (typeof memNo === 'string') {
-      course.typecode = typecode1; // 不明變數，型別不清楚
+    const input = document.querySelector('input'); // ❓ 
+    var memNo = input.value; // ❌ 重複宣告 memNo，覆蓋原值
+    if (memNo) {
+      course.typecode = typecode1; // ❌ typecode1 未定義
       if (course.typecode) {
-        sendToApi(course, memNo); // 不知道函數的傳遞位置順序意義
+        sendToApi(course, memNo); // ❓ 參數傳遞順序不清楚
       }
     }
   }
 }
-addMember(); // 缺少參數
+
+addMember(); // ❌ 未傳入 course 參數，看不出來
+
 ```
 
   </div>
@@ -1020,19 +1053,27 @@ type Course = {
  * @param course - 課程資料
  * @param memNo - 現在使用者ID
  */
-function sendToApi(course: Course, memNo: string) {
-  console.log('課程:', course);
-  console.log('成員:', memNo);
+function sendToApi(course: Course, memNo: string): void {
+  console.dir({ 課程: course, 成員: memNo }, { color: true });
 }
 
 /** 新增成員 */
 function addMember(course: Course): void {
-  const memNo = sessionStorage.getItem('memNo');
-  if (!memNo) return; // 若 memNo 不存在則直接返回
+  const input = document.querySelector<HTMLInputElement>("input");
+  if (!input) {
+    console.warn("找不到 input 元素");
+    return;
+  }
+
+  const memNo = input.value.trim();
+  if (!memNo) return; // 空值直接略過
+
   course.courseType = CourseType.Required; // 型別安全，IDE 提示
   sendToApi(course, memNo);
 }
+
 addMember();
+
 ```
 
   </div>
@@ -1119,12 +1160,12 @@ transtion: slide-right
   :initial="{ scale: 0.9, opacity: 0 }"
   :enter="{ scale: 1, opacity: 1, transition: { duration: 300, delay: 300 } }"
 >
-  🚀 讓我們一起往右側前進！
+  🚀 不是一定需要，但是有一定比較好
 </div>
 
 ---
-
-## layout: center
+layout: center
+---
 
 ## 導入計畫：每週工作坊 📚
 
