@@ -90,7 +90,7 @@ v-click="3"
 :initial="{ y: 40, opacity: 0 }"
 :enter="{ y: 0, opacity: 1, transition: {delay: 200} }">
 
-```javascript {monaco} { editorOptions: { wordWrap:'on'} }
+```javascript {monaco} { editorOptions: { lineNumbers:'on'} }
 function addMember(course) {
   course.typecode = typecode1; // 這是什麼？數字？字串？物件？
   // course 無法得知他是甚麼或是裡面有甚麼，必須要往上翻檔案
@@ -202,7 +202,7 @@ v-click="3"
 $('#btnDelete').click(deleteMember);
 ```
 
-```javascript {*|3,10,17}
+```javascript {*|3,10,17|3,10,17}
 function deleteMember() {
   // 取值
   var memNo = $('#input').data('memno');
@@ -265,14 +265,14 @@ transition: slide-down
 v-motion
 :initial="{ y: 40, opacity: 0 }"
 :enter="{ x:0, y: 0, opacity: 1, transition: {delay: 400} }">
-場景三：接手維護別人的專案 ⚔️
+場景三：接手維護多人協作專案 ⚔️
 </div>
 
 <div class="text-gray-300" 
 v-motion
 :initial="{ y: 40, opacity: 0 }"
 :enter="{ y: 0, opacity: 1, transition: {delay: 500} }">
-  小龍接手一個同事留下的專案，但是裡面光是條件判斷就有 n 種寫法
+  小龍接手一個稍微有點規模的多人專案，但是裡面光是條件判斷就有 n 種寫法
 </div>
 
 <div class="text-gray-300" 
@@ -332,7 +332,7 @@ const grade = (score) => {
 ```javascript
 // 🔴 版本一：老式寫法
 function grade(score) {
-  var result; // 使用 var，不是 ES6+
+  var result; // 不該使用 var
 
   if (score > 90) {
     result = 'A';
@@ -674,6 +674,59 @@ function enrollCourse(course: Course): void {
 </div>
 
 ---
+
+<div 
+  class="p-4 mt-4 bg-gray-900 border-1 border-violet-600 rounded-xl text-slate-200 shadow-lg"
+  v-motion
+  :initial="{opacity: 0, y: 20}"
+  :enter="{opacity: 1, y: 0, transition: {duration: 450}}"
+>
+  <h2 class="text-xl font-bold mb-4 text-blue-300">TypeScript vs JavaScript</h2>
+
+  <table class="w-full text-sm border-collapse">
+    <thead class="text-slate-400 border-b border-slate-600">
+      <tr>
+        <th class="text-left p-2">🛠</th>
+        <th class="text-left p-2 text-slate-300">JavaScript</th>
+        <th class="text-left p-2 text-blue-300">TypeScript</th>
+      </tr>
+    </thead>
+    <tbody class="text-slate-300">
+      <tr>
+        <td class="p-2">型別檢查</td>
+        <td class="p-2 text-gray-400">❌ 沒有型別限制</td>
+        <td class="p-2 text-yellow-600">✅ 靜態型別檢查</td>
+      </tr>
+      <tr>
+        <td class="p-2">錯誤發現</td>
+        <td class="p-2 text-gray-400">執行階段才發現</td>
+        <td class="p-2 text-yellow-600">編譯階段即報錯</td>
+      </tr>
+      <tr>
+        <td class="p-2">IDE 支援</td>
+        <td class="p-2 text-gray-400">只有一般瀏覽器 API 支援</td>
+        <td class="p-2 text-yellow-600">完整型別推論與提示</td>
+      </tr>
+      <tr>
+        <td class="p-2">大型專案</td>
+        <td class="p-2 text-gray-400">維護困難</td>
+        <td class="p-2 text-yellow-600">更適合多人協作</td>
+      </tr>
+      <tr>
+        <td class="p-2">學習門檻</td>
+        <td class="p-2 text-gray-400">較低</td>
+        <td class="p-2 text-yellow-600">稍高，但值得</td>
+      </tr>
+    </tbody>
+  </table>
+
+  <div class="mt-4 text-xs text-slate-400">
+    ✅ <strong>TypeScript 可以直接取代 JavaScript</strong>，但提供更強大的型別保護與開發體驗！
+  </div>
+</div>
+
+
+---
 layout: two-cols-header
 class: mr-2
 ---
@@ -853,7 +906,7 @@ function getCourseInfo() {
 // 😵 當格式不統一的時候
 function getCourseInfo() {
   // 空格不一致
-  var course = { id: 456, title: 'TypeScript 入門' }; // 使用單引號，物件攤平較難讀
+  const course = { id: 456, title: 'TypeScript 入門' }; // 使用單引號，物件攤平較難讀
     if (course.title == 'TypeScript 入門') return course // 沒使用block，並且結尾沒有分號
 }
 ```
@@ -1007,14 +1060,14 @@ transtion: fade-out
 
   <!-- Before -->
   <div
-    class="bg-red-900/40 p-3 rounded-md shadow-inner border border-red-600 h-[85%] overflow-auto"
+    class="bg-red-900/40 p-3 rounded-md shadow-inner border border-red-600 h-4/5 overflow-auto"
     v-motion
     :initial="{ x: -100, opacity: 0 }"
     :enter="{ x: 0, opacity: 1, transition: { duration: 400 } }"
   >
     <h3 class="font-bold text-red-300 text-lg mb-2">😰 改善前</h3>
 
-```js {monaco}
+```js {monaco} { editorOptions: { wordWrap:'on', lineNumbers: 'on'} }
 // 傳送API
 function sendToApi(course, memNo) {
   console.dir({ 課程: course, 成員: memNo }, { color: true });
@@ -1024,8 +1077,8 @@ function addMember(course) {
   var memNo = sessionStorage.getItem('memNo');
 
   // 巢狀過深，命名混亂，型別不明
-  if (memNo !== '') {
-    const input = document.querySelector('input'); // ❓ 
+  if (memNo !== '') { // 檢查不夠嚴謹
+    const input = document.querySelector('input'); // ❓地雷:如果錯誤，不會做錯誤處理
     var memNo = input.value; // ❌ 重複宣告 memNo，覆蓋原值
     if (memNo) {
       course.typecode = typecode1; // ❌ typecode1 未定義
@@ -1044,7 +1097,7 @@ addMember(); // ❌ 未傳入 course 參數，看不出來
 
   <!-- After -->
   <div
-    class="bg-green-900/40 p-4 rounded-md shadow-inner border border-green-600 overflow-y-auto max-h-lg"
+    class="bg-green-900/40 p-3 rounded-md shadow-inner border border-green-600 overflow-y-auto max-h-lg"
     v-motion
     v-click
     :initial="{ x: 100, opacity: 0 }"
@@ -1052,7 +1105,7 @@ addMember(); // ❌ 未傳入 course 參數，看不出來
   >
     <h3 class="font-bold text-green-300 text-lg mb-2">😊 改善後</h3>
 
-```ts {monaco}
+```ts {monaco} { editorOptions: { wordWrap:'on', lineNumbers: 'on'} }
 enum CourseType {
   Required = 1,
   Elective = 2,
@@ -1077,19 +1130,19 @@ function sendToApi(course: Course, memNo: string): void {
 /** @description 新增成員 */
 function addMember(course: Course): void {
   const input = document.querySelector<HTMLInputElement>("input");
-  if (!input) {
+  if (!input) { // ✅ ts 提醒有可能會是 null
     console.warn("找不到 input 元素");
     return;
   }
-
+  
   const memNo = input.value.trim();
   if (!memNo) return; // 空值直接略過
 
-  course.courseType = CourseType.Required; // 型別安全，IDE 提示
+  course.courseType = CourseType.Required; // ✅ 型別安全，IDE 提示
   sendToApi(course, memNo);
 }
 
-addMember();
+addMember(); // ✅ 開發階段編譯提示錯誤
 
 ```
 
@@ -1182,7 +1235,7 @@ transtion: slide-right
 
 ---
 layout: image
-class: place-content-center text-center sepia-10 font-bold grayscale-40
+class: place-content-center text-center sepia-10 font-bold grayscale-30
 image: https://images.unsplash.com/photo-1588399472618-b86d94996ee8?q=80&w=688&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
 ---
 
@@ -1191,12 +1244,19 @@ image: https://images.unsplash.com/photo-1588399472618-b86d94996ee8?q=80&w=688&a
 > 實際操作 Demo • 踩坑經驗分享 • 如何改善現有問題
 
 ---
-layout: center
-class: text-center
+layout: image
+class: place-content-end text-start font-bold grayscale-40
+image: https://wallpapers.com/images/high/pixel-art-shoyo-hinata-yek1hfrdi7xvfjta.webp
 ---
 
 # 謝謝聆聽
 
-[把 TypeScript、ESLint、Prettier、Alias 摻再一起做沙尿牛丸 ](https://rexhung0302.github.io/2022/11/06/20221106/) ·[為甚麼要有框架](https://developer.mozilla.org/zh-TW/docs/Learn_web_development/Core/Frameworks_libraries/Introduction) · [GitHub](https://github.com/davelin18yufan/typescript_eslint_slide) · [Showcases](https://sli.dev/resources/showcases)
+[把 TypeScript、ESLint、Prettier、Alias 摻再一起做沙尿牛丸 ](https://rexhung0302.github.io/2022/11/06/20221106/) ·[為甚麼要有框架](https://developer.mozilla.org/zh-TW/docs/Learn_web_development/Core/Frameworks_libraries/Introduction) · [GitHub Repo](https://github.com/davelin18yufan/typescript_eslint_slide) · [TypeScript for JavaScript Programmers](https://www.typescriptlang.org/docs/handbook/typescript-in-5-minutes.html)
 
 <PoweredBySlidev mt-10 />
+
+<style>
+a{
+  color:rgb(6, 40, 234)
+}
+  </style>
