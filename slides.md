@@ -10,8 +10,6 @@ title: 提升開發效率的利器
 info: |
   ## TypeScript + ESLint + Prettier
   讓 JavaScript 開發更安全、更高效的工具組合
-# enabled pdf downloading in SPA build, can also be a custom url
-download: true
 colorSchema: dark
 fonts:
   sans: DotGothic16
