@@ -37,11 +37,11 @@ mdc: true
 
 ## TypeScript + ESLint + Prettier
 
-_讓 JavaScript 開發更安全、更高效_
+_讓 JavaScript 開發更安全、更高效_ -- Dave
 
 <div class="ml-auto py-8">
   <span class="px-2 py-1 rounded cursor-pointer text-yellow-300 block text-end" @click="$slidev.nav.next">
-    Let's roll. <carbon:arrow-right class="inline"/>
+    槍在手，跟我走 <carbon:arrow-right class="inline"/>
   </span>
 </div>
 
