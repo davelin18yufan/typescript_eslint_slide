@@ -12,8 +12,6 @@ info: |
   讓 JavaScript 開發更安全、更高效的工具組合
 # enabled pdf downloading in SPA build, can also be a custom url
 download: true
-# filename of the export file
-exportFilename: frontend structure exported
 colorSchema: dark
 fonts:
   sans: DotGothic16
