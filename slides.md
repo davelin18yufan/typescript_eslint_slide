@@ -29,7 +29,7 @@ mdc: true
 #  ogImage: https://cover.sli.dev
 ---
 
-# 提升開發效率的前端三本柱
+# 提升開發效率的 Javascript 三本柱
 
 ## TypeScript + ESLint + Prettier
 
