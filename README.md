@@ -1,4 +1,4 @@
-# Welcome to [Slidev](https://github.com/slidevjs/slidev)!
+# Deploy at [Vercel](https://typescript-eslint-slide.vercel.app/1)!
 
 To start the slide show:
 
